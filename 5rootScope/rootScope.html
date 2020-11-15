@@ -1,0 +1,75 @@
+ <!--
+ AngularJS uses html compiler
+ Process:
+  compile
+  load
+  transform -->
+  <!doctype html>
+  <html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+      <script type="text/javascript">
+          //[] represents we are creating a module, if we dont use [], it means we are trying to retrieve and existing module.
+           //module controller
+           //$rootScope initialized through module
+           var sample = angular.module("sample",[]).run(["$rootScope", function($rootScope){
+             $rootScope.taxPercent = 30;
+           }]);
+           //$scope is a reserved service in angularJS
+           //production level or standard code, by minimizing JS, by providing all values to use first inorder to be replaced later inside[]
+          //angular is smart enough to replace $scope as C
+
+          //controller definition
+          sample.controller("emp", ["$scope", function($scope){
+            $scope.name = "pradeepa";//name is a property
+            $scope.technology = "AngularJS1.8";
+           
+          }]);
+
+          sample.controller("empDetails", ["$scope", function($scope){
+            $scope.country = "Germany";   
+            $scope.sal = 5000;                    
+          }]);
+
+          sample.controller("empPayCheck", ["$scope", "$rootScope", function($scope, $rootScope){
+            $scope.getAnualSal = function(){//getAnualSal is a method
+              return this.sal * 12;
+            }   
+            $scope.getTax = function(){//getAnualSal is a method
+              return this.sal * $rootScope.taxPercent/100;
+            }  
+             $scope.getNet = function(){//getAnualSal is a method
+              return this.sal - this.getTax();
+            }             
+          }]);
+      </script>
+  </head>
+   <!--rootScope is automatically defined behind the scenes once we write ng-app-->
+    <body ng-app="sample">
+      <!--o is an controller instance created using as keyword-->
+      <div ng-controller = "emp">
+        <label>Understanding $scope and its relation with controller and view:</label>   
+        <!--access the member name of instance o-->  
+        <h1>Hello: {{name}}!</h1>
+        <p>Looks like you are interested learning {{technology}}</p>
+       
+
+
+            <!--ng-controller is a directive-->  
+            <div ng-controller = "empDetails">
+              <label>Understanding $scope Inheritance</label>   
+              <!--access the member name of instance o-->  
+              <p>Looks like you got relocated to {{country}}</p>
+              <p>and Your anual salary is now {{sal}}</p>
+
+
+                  <div ng-controller = "empPayCheck">
+                    <label>Understanding $scope nested Inheritance</label>   
+                    <!--access the member name of instance o-->  
+                    <p>excluding your tax {{getTax()}} , Your anual salary is now {{getNet()}}</p>
+                  </div>
+            </div>
+      </div>
+     
+    </body>
+  </html>

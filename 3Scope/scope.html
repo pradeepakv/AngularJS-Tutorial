@@ -1,0 +1,30 @@
+ <!--
+ AngularJS uses html compiler
+ Process:
+  compile
+  load
+  transform -->
+  <!doctype html>
+  <html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+      <script type="text/javascript">
+          //[] represents we are creating a module, if we dont use [], it means we are trying to retrieve and existing module.
+          var sample = angular.module("sample",[]); 
+           //$scope is a reserved service in angularJS
+          sample.controller("emp", function($scope){
+            $scope.name = "pradeepa";
+            $scope.technology = "AngularJS1.8"
+          });
+      </script>
+  </head>
+    <body ng-app="sample">
+      <!--o is an controller instance created using as keyword-->
+      <div ng-controller = "emp">
+        <label>Understanding $scope and its relation with controller and view:</label>   
+        <!--access the member name of instance o-->  
+        <h1>Hello: {{name}}!</h1>
+        <p>Looks like you are interested learning {{technology}}</p>
+      </div>
+    </body>
+  </html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script type="text/javascript" src="oneWay.js"></script>
+</head>
+  <body ng-app="sample">
+    <div ng-controller="emp">
+      <label>Sum:</label>     
+      <!--In OneWay binding data flows from scope to view
+        Scope Data:
+            .gets propagated to view
+            .data modification: gets propagated immediately and reflects in view
+        View Data:
+            .No Propagation happens(back to scope) for any data change.
+        Usually performed through "ng-bind" or
+        evaluation expressions
+        -->
+        <div>
+          <h2>OneWay DataBinding</h2>
+          <!--symbol :: doesn't allow to change the initial value-->
+            <p>value of a:{{::a}}</p>
+            <p>value of b:{{::b}}</p>
+            <h1>sum of two number a+b: {{::a+b}}!</h1>
+        </div>
+     
+        
+        value of a:<span ng-bind="a"></span>
+        value of b:<span ng-bind="b"></span>
+        <hr>
+        <!--oneWay data Binding-->
+        <div>
+          <h2>twoWay DataBinding</h2>
+          <p>value of a:{{a}}</p>
+          <p>value of b:{{b}}</p>
+          <h1>sum of two numbers = {{sum}}!</h1>
+          <button ng-click="getSum()">Calculate</button>
+      </div>
+    </div>
+  </body>
+</html>
